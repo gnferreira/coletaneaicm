@@ -51,10 +51,11 @@ input {
 /* 🔥 ÁREA DO LOUVOR (CORREÇÃO PRINCIPAL) */
 .song {
   margin-top: 20px;
-  font-family: "Courier New", monospace; /* ESSENCIAL */
-  white-space: pre; /* ESSENCIAL */
+  font-family: "Courier New", monospace;
+  white-space: pre-wrap; /* 🔥 importante */
   line-height: 1.6;
   font-size: 15px;
+  word-break: keep-all; /* 🔥 evita quebrar cifra */
 }
 
 /* título */
