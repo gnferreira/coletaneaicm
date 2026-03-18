@@ -17,21 +17,35 @@ async function carregar() {
 
 carregar();
 
-// 🎸 FORMATAÇÃO CORRETA (SEM QUEBRAR ESPAÇOS)
-function formatarLouvor(texto) {
+// 🎸 CORRIGIR CIFRAS QUEBRADAS
+function corrigirCifras(texto) {
+  return texto
+    // D m → Dm
+    .replace(/\b([A-G])\s+(m|7|maj7|sus|dim|aug)\b/g, "$1$2")
 
+    // G 7 → G7
+    .replace(/\b([A-G])\s+(7)\b/g, "$17")
+
+    // espaços duplicados
+    .replace(/[ ]{2,}/g, " ")
+
+    // limpar espaços antes de quebra de linha
+    .replace(/\s+\n/g, "\n");
+}
+
+// 🎸 FORMATAR SEM QUEBRAR ALINHAMENTO
+function formatarLouvor(texto) {
   if (!texto) return "";
 
-  // NÃO usar trim() para não quebrar alinhamento
-  let resultado = texto;
+  let t = corrigirCifras(texto);
 
-  // destacar cifras sem mexer no espaçamento
-  resultado = resultado.replace(
+  // destacar cifras
+  t = t.replace(
     /\b([A-G](#|b)?(m|maj7|7|sus|dim|aug)?)\b/g,
     '<span class="chord">$1</span>'
   );
 
-  return resultado;
+  return t;
 }
 
 // 🔎 busca
@@ -65,7 +79,6 @@ ${s.numero} - ${s.titulo}
 ${formatarLouvor(s.letra)}
   `;
 
-  // scroll suave
   window.scrollTo({
     top: document.body.scrollHeight,
     behavior: "smooth"
