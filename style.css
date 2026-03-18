@@ -50,12 +50,10 @@ input {
 .song {
   margin-top: 20px;
   font-family: "Courier New", monospace;
-  white-space: pre; /* ESSENCIAL */
+  white-space: pre;
   line-height: 1.6;
   font-size: 15px;
-  overflow-x: auto;
 }
-
 /* 🎸 destacar cifras SEM quebrar layout */
 .song {
   color: white;
