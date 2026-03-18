@@ -1,29 +1,47 @@
 let songs = [];
 
-// 🔥 carregar JSON corretamente
+const search = document.getElementById("search");
+const suggestions = document.getElementById("suggestions");
+const songDiv = document.getElementById("song");
+
+// 🔥 carregar JSON
 async function carregar() {
   try {
     const res = await fetch("songs.json");
     songs = await res.json();
     console.log("Louvores carregados:", songs.length);
   } catch (e) {
-    alert("Erro ao carregar songs.json. Rode em servidor!");
+    alert("Erro ao carregar songs.json. Verifique se está no Vercel ou servidor.");
   }
 }
 
 carregar();
 
-const search = document.getElementById("search");
-const suggestions = document.getElementById("suggestions");
-const songDiv = document.getElementById("song");
+// 🎸 FORMATAÇÃO INTELIGENTE
+function formatarLouvor(texto) {
+  const linhas = texto.split("\n");
 
-// 🎸 destacar cifras melhorado
-function destacar(texto) {
-  return texto.replace(/\b([A-G](#|b)?(m|maj7|7|sus|dim|aug)?)\b/g,
-    '<span class="chord">$1</span>');
+  return linhas.map(linha => {
+    let limpa = linha.trim();
+
+    if (!limpa) return "<br>";
+
+    // linha só com acordes
+    if (/^([A-G](#|b)?(m|maj7|7|sus|dim|aug)?\s?)+$/.test(limpa)) {
+      return `<div class="linha cifra">${limpa}</div>`;
+    }
+
+    // linha com cifra + letra
+    let linhaFormatada = limpa.replace(
+      /\b([A-G](#|b)?(m|maj7|7|sus|dim|aug)?)\b/g,
+      '<span class="chord">$1</span>'
+    );
+
+    return `<div class="linha">${linhaFormatada}</div>`;
+  }).join("");
 }
 
-// 🔎 busca melhorada (mais rápida)
+// 🔎 busca
 search.addEventListener("input", () => {
   const valor = search.value.toLowerCase();
   suggestions.innerHTML = "";
@@ -43,13 +61,19 @@ search.addEventListener("input", () => {
   });
 });
 
-// 🎵 mostrar
+// 🎵 mostrar louvor
 function mostrar(s) {
   suggestions.innerHTML = "";
   search.value = `${s.numero} - ${s.titulo}`;
 
   songDiv.innerHTML = `
     <h2>${s.numero} - ${s.titulo}</h2>
-    <div>${destacar(s.letra)}</div>
+    <div>${formatarLouvor(s.letra)}</div>
   `;
+
+  // 🔥 scroll suave
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: "smooth"
+  });
 }
