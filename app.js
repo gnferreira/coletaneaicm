@@ -4,34 +4,58 @@ const search = document.getElementById("search");
 const suggestions = document.getElementById("suggestions");
 const songDiv = document.getElementById("song");
 
-// carregar JSON
+// carregar
 async function carregar() {
-  try {
-    const res = await fetch("songs.json");
-    songs = await res.json();
-  } catch (e) {
-    alert("Erro ao carregar songs.json.");
-  }
+  const res = await fetch("songs.json");
+  songs = await res.json();
 }
 carregar();
 
-// 🔥 CORRIGIR CIFRAS QUEBRADAS
-function corrigirCifras(texto) {
-  return texto
-    .replace(/\b([A-G])\s+(m|7|maj7|sus|dim|aug)\b/g, "$1$2")
-    .replace(/\b([A-G])\s+(7)\b/g, "$17")
-    .replace(/[ ]{2,}/g, " ")
-    .replace(/\s+\n/g, "\n");
+// 🎸 detectar se é cifra
+function ehCifra(linha) {
+  return /^[A-G][#b]?(m|maj7|7|sus|dim|aug)?$/.test(linha.trim());
 }
 
-// 🔥 MOSTRAR (SEM HTML INTERNO)
+// 🔥 reconstruir linhas horizontais
+function corrigirFormato(texto) {
+  const linhas = texto.split("\n");
+  let resultado = [];
+  let buffer = [];
+
+  linhas.forEach(l => {
+    if (ehCifra(l)) {
+      buffer.push(l.trim());
+    } else {
+      if (buffer.length > 0) {
+        resultado.push(buffer.join("   "));
+        buffer = [];
+      }
+      resultado.push(l);
+    }
+  });
+
+  if (buffer.length > 0) {
+    resultado.push(buffer.join("   "));
+  }
+
+  return resultado.join("\n");
+}
+
+// 🎨 destacar cifras SEM quebrar layout
+function destacar(texto) {
+  return texto.replace(
+    /\b([A-G](#|b)?(m|maj7|7|sus|dim|aug)?)\b/g,
+    '[$1]' // visual simples e seguro
+  );
+}
+
+// mostrar
 function mostrar(s) {
   suggestions.innerHTML = "";
   search.value = `${s.numero} - ${s.titulo}`;
 
-  const texto = corrigirCifras(s.letra);
+  let texto = corrigirFormato(s.letra);
 
-  // 🔥 USAR textContent (NÃO innerHTML)
   songDiv.textContent = `${s.numero} - ${s.titulo}\n\n${texto}`;
 }
 
