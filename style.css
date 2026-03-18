@@ -41,17 +41,18 @@ input {
 .suggestions div {
   padding: 12px;
   border-bottom: 1px solid #333;
+  cursor: pointer;
 }
 
 .suggestions div:active {
   background: #333;
 }
 
-/* 🔥 ÁREA DO LOUVOR (CORRIGIDO) */
+/* 🔥 ÁREA DO LOUVOR (CORREÇÃO PRINCIPAL) */
 .song {
   margin-top: 20px;
-  font-family: "Courier New", monospace; /* fonte fixa */
-  white-space: pre; /* 🔥 mantém espaçamento original */
+  font-family: "Courier New", monospace; /* ESSENCIAL */
+  white-space: pre; /* ESSENCIAL */
   line-height: 1.6;
   font-size: 15px;
 }
@@ -63,11 +64,6 @@ input {
 }
 
 /* cifras */
-.cifra {
-  color: #00ffcc;
-  font-weight: bold;
-}
-
 .chord {
   color: #00ffcc;
   font-weight: bold;
