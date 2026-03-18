@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   background: #121212;
   color: white;
 }
@@ -15,7 +15,7 @@ header {
 
 .container {
   padding: 12px;
-  max-width: 600px;
+  max-width: 700px;
   margin: auto;
 }
 
@@ -26,8 +26,10 @@ input {
   border: none;
   font-size: 16px;
   box-sizing: border-box;
+  outline: none;
 }
 
+/* sugestões */
 .suggestions {
   margin-top: 8px;
   background: #1e1e1e;
@@ -45,28 +47,45 @@ input {
   background: #333;
 }
 
+/* louvor */
 .song {
   margin-top: 20px;
-  line-height: 1.7;
+  font-family: monospace;
+  line-height: 1.8;
   font-size: 15px;
 }
 
+/* título */
 .song h2 {
   font-size: 18px;
+  margin-bottom: 10px;
 }
 
+/* linhas */
+.linha {
+  margin-bottom: 4px;
+}
+
+/* linha só de cifra */
+.cifra {
+  color: #00ffcc;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* cifra dentro da frase */
 .chord {
   color: #00ffcc;
   font-weight: bold;
 }
 
-/* 🔥 melhora leitura no celular */
+/* mobile */
 @media (max-width: 480px) {
-  body {
-    font-size: 15px;
-  }
-
   .song {
     font-size: 14px;
+  }
+
+  header {
+    font-size: 18px;
   }
 }
