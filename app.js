@@ -6,41 +6,33 @@ const songDiv = document.getElementById("song");
 
 // carregar JSON
 async function carregar() {
-  const res = await fetch("songs.json");
-  songs = await res.json();
+  try {
+    const res = await fetch("songs.json");
+    songs = await res.json();
+  } catch (e) {
+    alert("Erro ao carregar songs.json.");
+  }
 }
 carregar();
 
-// 🔥 corrigir cifras
+// 🔥 CORRIGIR CIFRAS QUEBRADAS
 function corrigirCifras(texto) {
   return texto
     .replace(/\b([A-G])\s+(m|7|maj7|sus|dim|aug)\b/g, "$1$2")
-    .replace(/\b([A-G])\s+(7)\b/g, "$17");
+    .replace(/\b([A-G])\s+(7)\b/g, "$17")
+    .replace(/[ ]{2,}/g, " ")
+    .replace(/\s+\n/g, "\n");
 }
 
-// 🔥 destacar SEM QUEBRAR LINHA
-function destacarCifrasSeguro(texto) {
-  const regex = /\b([A-G](#|b)?(m|maj7|7|sus|dim|aug)?)\b/g;
-
-  let partes = texto.split(regex);
-
-  return texto.replace(regex, (match) => {
-    return `<span class="chord">${match}</span>`;
-  });
-}
-
-// mostrar louvor
+// 🔥 MOSTRAR (SEM HTML INTERNO)
 function mostrar(s) {
   suggestions.innerHTML = "";
   search.value = `${s.numero} - ${s.titulo}`;
 
-  let texto = corrigirCifras(s.letra);
+  const texto = corrigirCifras(s.letra);
 
-  songDiv.innerHTML = `
-<pre>
-${destacarCifrasSeguro(texto)}
-</pre>
-  `;
+  // 🔥 USAR textContent (NÃO innerHTML)
+  songDiv.textContent = `${s.numero} - ${s.titulo}\n\n${texto}`;
 }
 
 // busca
