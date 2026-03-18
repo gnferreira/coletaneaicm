@@ -47,11 +47,12 @@ input {
   background: #333;
 }
 
-/* louvor */
+/* 🔥 ÁREA DO LOUVOR (CORRIGIDO) */
 .song {
   margin-top: 20px;
-  font-family: monospace;
-  line-height: 1.8;
+  font-family: "Courier New", monospace; /* fonte fixa */
+  white-space: pre; /* 🔥 mantém espaçamento original */
+  line-height: 1.6;
   font-size: 15px;
 }
 
@@ -61,19 +62,12 @@ input {
   margin-bottom: 10px;
 }
 
-/* linhas */
-.linha {
-  margin-bottom: 4px;
-}
-
-/* linha só de cifra */
+/* cifras */
 .cifra {
   color: #00ffcc;
   font-weight: bold;
-  letter-spacing: 1px;
 }
 
-/* cifra dentro da frase */
 .chord {
   color: #00ffcc;
   font-weight: bold;
