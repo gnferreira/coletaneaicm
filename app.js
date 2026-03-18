@@ -4,59 +4,72 @@ const search = document.getElementById("search");
 const suggestions = document.getElementById("suggestions");
 const songDiv = document.getElementById("song");
 
-// carregar
+// carregar JSON
 async function carregar() {
   const res = await fetch("songs.json");
   songs = await res.json();
 }
 carregar();
 
-// 🎸 detectar se é cifra
-function ehCifra(linha) {
-  return /^[A-G][#b]?(m|maj7|7|sus|dim|aug)?$/.test(linha.trim());
+// 🎸 regex de cifra
+const regexCifra = /\b([A-G](#|b)?(m|maj7|7|sus|dim|aug)?)\b/g;
+
+// 🔥 identifica linha de cifra (linha com maioria de acordes)
+function linhaEhCifra(linha) {
+  const matches = linha.match(regexCifra);
+  if (!matches) return false;
+  return matches.length >= linha.trim().split(/\s+/).length / 2;
 }
 
-// 🔥 reconstruir linhas horizontais
-function corrigirFormato(texto) {
+// 🎨 destaca cifras SEM quebrar alinhamento
+function destacarLinha(linha) {
+  return linha.replace(regexCifra, '<span class="chord">$1</span>');
+}
+
+// 🔥 reconstrução + destaque inteligente
+function processarTexto(texto) {
   const linhas = texto.split("\n");
   let resultado = [];
+
   let buffer = [];
 
-  linhas.forEach(l => {
-    if (ehCifra(l)) {
-      buffer.push(l.trim());
+  linhas.forEach(linha => {
+    if (/^[A-G][#b]?(m|maj7|7|sus|dim|aug)?$/.test(linha.trim())) {
+      buffer.push(linha.trim());
     } else {
       if (buffer.length > 0) {
-        resultado.push(buffer.join("   "));
+        const linhaCifras = buffer.join("   ");
+        resultado.push(destacarLinha(linhaCifras));
         buffer = [];
       }
-      resultado.push(l);
+
+      if (linhaEhCifra(linha)) {
+        resultado.push(destacarLinha(linha));
+      } else {
+        resultado.push(linha);
+      }
     }
   });
 
   if (buffer.length > 0) {
-    resultado.push(buffer.join("   "));
+    resultado.push(destacarLinha(buffer.join("   ")));
   }
 
   return resultado.join("\n");
 }
 
-// 🎨 destacar cifras SEM quebrar layout
-function destacar(texto) {
-  return texto.replace(
-    /\b([A-G](#|b)?(m|maj7|7|sus|dim|aug)?)\b/g,
-    '[$1]' // visual simples e seguro
-  );
-}
-
-// mostrar
+// mostrar louvor
 function mostrar(s) {
   suggestions.innerHTML = "";
   search.value = `${s.numero} - ${s.titulo}`;
 
-  let texto = corrigirFormato(s.letra);
+  const textoProcessado = processarTexto(s.letra);
 
-  songDiv.textContent = `${s.numero} - ${s.titulo}\n\n${texto}`;
+  songDiv.innerHTML = `
+<pre>${s.numero} - ${s.titulo}
+
+${textoProcessado}</pre>
+  `;
 }
 
 // busca
