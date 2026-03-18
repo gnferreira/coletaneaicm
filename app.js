@@ -11,34 +11,27 @@ async function carregar() {
     songs = await res.json();
     console.log("Louvores carregados:", songs.length);
   } catch (e) {
-    alert("Erro ao carregar songs.json. Verifique se está no Vercel ou servidor.");
+    alert("Erro ao carregar songs.json. Use Vercel ou servidor local.");
   }
 }
 
 carregar();
 
-// 🎸 FORMATAÇÃO INTELIGENTE
+// 🎸 FORMATAÇÃO CORRETA (SEM QUEBRAR ESPAÇOS)
 function formatarLouvor(texto) {
-  const linhas = texto.split("\n");
 
-  return linhas.map(linha => {
-    let limpa = linha.trim();
+  if (!texto) return "";
 
-    if (!limpa) return "<br>";
+  // NÃO usar trim() para não quebrar alinhamento
+  let resultado = texto;
 
-    // linha só com acordes
-    if (/^([A-G](#|b)?(m|maj7|7|sus|dim|aug)?\s?)+$/.test(limpa)) {
-      return `<div class="linha cifra">${limpa}</div>`;
-    }
+  // destacar cifras sem mexer no espaçamento
+  resultado = resultado.replace(
+    /\b([A-G](#|b)?(m|maj7|7|sus|dim|aug)?)\b/g,
+    '<span class="chord">$1</span>'
+  );
 
-    // linha com cifra + letra
-    let linhaFormatada = limpa.replace(
-      /\b([A-G](#|b)?(m|maj7|7|sus|dim|aug)?)\b/g,
-      '<span class="chord">$1</span>'
-    );
-
-    return `<div class="linha">${linhaFormatada}</div>`;
-  }).join("");
+  return resultado;
 }
 
 // 🔎 busca
@@ -67,11 +60,12 @@ function mostrar(s) {
   search.value = `${s.numero} - ${s.titulo}`;
 
   songDiv.innerHTML = `
-    <h2>${s.numero} - ${s.titulo}</h2>
-    <div>${formatarLouvor(s.letra)}</div>
+${s.numero} - ${s.titulo}
+
+${formatarLouvor(s.letra)}
   `;
 
-  // 🔥 scroll suave
+  // scroll suave
   window.scrollTo({
     top: document.body.scrollHeight,
     behavior: "smooth"
