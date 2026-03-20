@@ -81,23 +81,25 @@ input {
 }
 
 .linha-musica {
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .acordes {
   color: #00ffcc;
   font-weight: bold;
-  line-height: 1.2;
-  margin-bottom: 1px;
+  line-height: 1.1;
+  margin-bottom: 0;
 }
 
 .letra {
   color: #ffffff;
-  line-height: 1.35;
+  line-height: 1.25;
 }
 
-.bloco-espaco {
-  height: 10px;
+.linha-especial {
+  margin: 8px 0 4px;
+  font-weight: bold;
+  color: #dddddd;
 }
 
 @media (max-width: 480px) {
@@ -120,11 +122,8 @@ input {
   }
 
   .acordes,
-  .letra {
+  .letra,
+  .linha-especial {
     font-size: 14px;
-  }
-
-  .bloco-espaco {
-    height: 8px;
   }
 }
