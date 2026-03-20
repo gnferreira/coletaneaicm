@@ -92,12 +92,13 @@ input {
 }
 
 .cabecalho-louvor {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .numero-louvor {
   font-size: 12px;
   opacity: 0.75;
+  margin-bottom: 3px;
 }
 
 .song h2 {
@@ -111,30 +112,57 @@ input {
   padding: 0;
 }
 
-.pre-louvor {
+/* modo tipo cifra club */
+.cifra-club-mode {
+  font-family: "Courier New", monospace;
+}
+
+.linha-cifrada {
+  position: relative;
+  margin: 0;
+  padding: 0 0 2px 0;
+}
+
+.linha-cifrada pre {
   margin: 0;
   padding: 0;
   white-space: pre-wrap;
+  word-break: keep-all;
+  overflow-x: auto;
   font-family: "Courier New", monospace;
-  font-size: 17px;
-  line-height: 0.95;
-  color: #ffffff;
 }
 
-.acordes-inline {
+.camada-acordes {
   color: #00ffcc;
   font-weight: 700;
+  font-size: 15px;
+  line-height: 1;
   text-shadow: 0 0 1px #00ffcc;
 }
 
-.letra-inline {
+.camada-letra {
   color: #ffffff;
   font-weight: 500;
+  font-size: 15px;
+  line-height: 1;
 }
 
-.linha-especial-inline {
+.so-acordes .camada-acordes {
+  margin-bottom: 0;
+}
+
+.so-letra .camada-letra {
+  margin-bottom: 0;
+}
+
+.linha-especial {
   color: #dddddd;
   font-weight: 700;
+  font-size: 13px;
+  line-height: 1.1;
+  margin: 2px 0 1px 0;
+  font-family: "Courier New", monospace;
+  white-space: pre-wrap;
 }
 
 @media (max-width: 480px) {
@@ -170,8 +198,15 @@ input {
     padding: 11px 6px;
   }
 
-  .pre-louvor {
-    font-size: 15px;
-    line-height: 0.9;
+  .camada-acordes {
+    font-size: 14px;
+  }
+
+  .camada-letra {
+    font-size: 14px;
+  }
+
+  .linha-especial {
+    font-size: 12px;
   }
 }
