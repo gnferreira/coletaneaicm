@@ -1,9 +1,7 @@
-.corpo-louvor {
-  font-family: "Courier New", monospace;
-  white-space: pre-wrap;
-  line-height: 1; /* 🔥 ESSENCIAL */
-  margin: 0;
-  padding: 0;
+.corpo-louvor * {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
 }
 
 /* remove QUALQUER espaço entre blocos */
