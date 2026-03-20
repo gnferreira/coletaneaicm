@@ -26,6 +26,28 @@ header {
   margin: 0 auto;
 }
 
+.seletor-banco {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.tab-btn {
+  border: none;
+  border-radius: 10px;
+  padding: 12px 8px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #2a2a2a;
+  color: #fff;
+}
+
+.tab-btn.active {
+  background: #00a884;
+}
+
 input {
   width: 100%;
   padding: 12px;
@@ -35,6 +57,12 @@ input {
   outline: none;
   background: #ffffff;
   color: #111111;
+}
+
+.status-banco {
+  font-size: 12px;
+  opacity: 0.8;
+  margin-top: 8px;
 }
 
 .suggestions {
@@ -86,16 +114,15 @@ input {
   overflow-x: auto;
 }
 
-/* 🔥 AJUSTE PRINCIPAL */
 .linha-musica {
-  margin-bottom: 1px; /* controla espaço entre frases */
+  margin-bottom: 1px;
 }
 
 .acordes {
   color: #00ffcc;
   font-weight: bold;
   line-height: 0.9;
-  margin-bottom: -1px; /* mantém cifra próxima da letra */
+  margin-bottom: -1px;
   font-size: 14px;
 }
 
@@ -106,7 +133,7 @@ input {
 }
 
 .linha-especial {
-  margin: 5px 0 2px;
+  margin: 4px 0 1px;
   font-weight: bold;
   color: #dddddd;
   font-size: 13px;
@@ -157,6 +184,11 @@ input {
 
   .linha-especial {
     font-size: 12px;
-    margin: 4px 0 2px;
+    margin: 4px 0 1px;
+  }
+
+  .tab-btn {
+    font-size: 12px;
+    padding: 11px 6px;
   }
 }
