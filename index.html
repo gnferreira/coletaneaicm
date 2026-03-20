@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Coletânea Maranata</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Louvores Maranata</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
+  <header>IGREJA CRISTÃ MARANATA - LOUVORES</header>
 
-<header>Igreja Cristã Maranata - Coletânea</header>
+  <div class="container">
+    <div class="seletor-banco">
+      <button id="btnColetanea" class="tab-btn active">LOUVORES DA COLETÂNEA</button>
+      <button id="btnAvulsos" class="tab-btn">LOUVORES AVULSOS</button>
+    </div>
 
-<div class="container">
+    <input type="text" id="search" placeholder="Buscar por número ou nome..." />
+    <div id="statusBanco" class="status-banco">Base atual: Louvores da Coletânea</div>
+    <div id="suggestions" class="suggestions"></div>
+    <div id="song" class="song"></div>
+  </div>
 
-<input type="text" id="search" placeholder="Buscar louvor por número ou nome...">
-<div id="suggestions" class="suggestions"></div>
-
-<div id="song" class="song"></div>
-
-</div>
-
-<script src="app.js"></script>
-
+  <script src="app.js"></script>
 </body>
 </html>
