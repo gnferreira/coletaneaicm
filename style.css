@@ -28,7 +28,7 @@ header {
   margin: auto;
 }
 
-/* INPUT BUSCA */
+/* INPUT */
 input {
   width: 100%;
   padding: 14px;
@@ -51,7 +51,6 @@ input {
   padding: 12px;
   border-bottom: 1px solid #333;
   cursor: pointer;
-  font-size: 15px;
 }
 
 .suggestions div:hover {
@@ -61,37 +60,30 @@ input {
 /* 🎸 ÁREA DO LOUVOR */
 .song {
   margin-top: 20px;
-  font-family: "Courier New", monospace; /* ESSENCIAL */
-  white-space: pre; /* NÃO ALTERAR */
+  font-family: "Courier New", monospace;
+  white-space: pre;
   line-height: 1.6;
   font-size: 15px;
   overflow-x: auto;
 }
 
-/* 🎸 CIFRAS DESTACADAS */
+/* 🎸 CIFRAS */
 .chord {
   color: #00ffcc;
   font-weight: bold;
 }
 
-/* MOBILE AJUSTE */
+/* MOBILE */
 @media (max-width: 480px) {
-
   header {
     font-size: 16px;
-    padding: 14px;
   }
 
   input {
     font-size: 15px;
-    padding: 12px;
   }
 
   .song {
-    font-size: 14px;
-  }
-
-  .suggestions div {
     font-size: 14px;
   }
 }
