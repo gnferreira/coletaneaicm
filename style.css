@@ -99,21 +99,20 @@ input {
 .numero-louvor {
   font-size: 12px;
   opacity: 0.75;
-  margin-bottom: 3px;
 }
 
 .song h2 {
   margin: 0;
   font-size: 20px;
-  line-height: 1.2;
 }
 
+/* área do louvor */
 .corpo-louvor {
   margin: 0;
   padding: 0;
-  overflow: visible;
 }
 
+/* 🔥 estrutura principal */
 .pre-louvor {
   margin: 0;
   padding: 0;
@@ -122,25 +121,28 @@ input {
   font-size: 17px;
   line-height: 0.95;
   color: #ffffff;
-  overflow: visible;
 }
 
-.acordes-inline {
-  color: #00ffcc;
-  font-weight: 700;
-  text-shadow: 0 0 1px #00ffcc;
+/* 🔥 cifra MUITO destacada */
+.pre-louvor .acordes-inline {
+  color: #00ffcc !important;
+  font-weight: 900 !important;
+  text-shadow: 0 0 2px rgba(0,255,204,0.5);
 }
 
-.letra-inline {
-  color: #ffffff;
+/* letra */
+.pre-louvor .letra-inline {
+  color: #ffffff !important;
   font-weight: 500;
 }
 
-.linha-especial-inline {
-  color: #dddddd;
+/* especiais */
+.pre-louvor .linha-especial-inline {
+  color: #dddddd !important;
   font-weight: 700;
 }
 
+/* MOBILE */
 @media (max-width: 480px) {
   header {
     font-size: 15px;
