@@ -6,12 +6,12 @@ const songDiv = document.getElementById("song");
 
 async function carregar() {
   try {
-    const res = await fetch("songs.json");
+    const res = await fetch("songs_profissional.json");
     songs = await res.json();
     console.log("Louvores carregados:", songs.length);
   } catch (e) {
     console.error(e);
-    alert("Erro ao carregar songs.json");
+    alert("Erro ao carregar songs_profissional.json");
   }
 }
 
@@ -26,6 +26,17 @@ function escapeHtml(text) {
     .replaceAll("'", "&#039;");
 }
 
+function ehLinhaEspecial(letra) {
+  const t = (letra || "").trim().toLowerCase();
+  return (
+    t === "coro" ||
+    t.startsWith("introdução:") ||
+    t.startsWith("instrumentos:") ||
+    t.startsWith("final:") ||
+    t.startsWith("repetir")
+  );
+}
+
 function normalizarLinhas(linhas) {
   if (!Array.isArray(linhas)) return [];
 
@@ -34,36 +45,50 @@ function normalizarLinhas(linhas) {
     letra: (l?.letra || "").trim()
   }));
 
-  const semExcesso = [];
-  for (const linha of limpas) {
-    const vazia = !linha.acordes && !linha.letra;
-    const ultima = semExcesso[semExcesso.length - 1];
-    const ultimaVazia = ultima && !ultima.acordes && !ultima.letra;
+  const filtradas = limpas.filter((linha) => {
+    const texto = linha.letra;
+    const acordes = linha.acordes;
 
-    if (vazia && ultimaVazia) continue;
-    semExcesso.push(linha);
+    if (!texto && !acordes) return false;
+
+    if (
+      texto === "|" ||
+      texto === "I" ||
+      texto === "bis" ||
+      texto === "%"
+    ) {
+      return false;
+    }
+
+    return true;
+  });
+
+  const semRepeticao = [];
+  let ultimaFoiSeparador = false;
+
+  for (const linha of filtradas) {
+    const vaziaVisual = !linha.acordes && !linha.letra;
+    const separador = vaziaVisual || ehLinhaEspecial(linha.letra);
+
+    if (separador && ultimaFoiSeparador) {
+      continue;
+    }
+
+    semRepeticao.push(linha);
+    ultimaFoiSeparador = separador;
   }
 
-  while (semExcesso.length && !semExcesso[0].acordes && !semExcesso[0].letra) {
-    semExcesso.shift();
-  }
-  while (
-    semExcesso.length &&
-    !semExcesso[semExcesso.length - 1].acordes &&
-    !semExcesso[semExcesso.length - 1].letra
-  ) {
-    semExcesso.pop();
-  }
-
-  return semExcesso;
+  return semRepeticao;
 }
 
 function renderLinha(linha) {
   const acordes = escapeHtml(linha.acordes);
   const letra = escapeHtml(linha.letra);
 
-  if (!acordes && !letra) {
-    return `<div class="bloco-espaco"></div>`;
+  if (!acordes && !letra) return "";
+
+  if (ehLinhaEspecial(linha.letra)) {
+    return `<div class="linha-especial">${letra}</div>`;
   }
 
   return `
@@ -79,7 +104,6 @@ function mostrar(song) {
   search.value = `${song.numero} - ${song.titulo}`;
 
   const linhas = normalizarLinhas(song.linhas);
-
   const htmlLinhas = linhas.map(renderLinha).join("");
 
   songDiv.innerHTML = `
@@ -87,9 +111,7 @@ function mostrar(song) {
       <div class="numero-louvor">${escapeHtml(song.numero)}</div>
       <h2>${escapeHtml(song.titulo)}</h2>
     </div>
-    <div class="corpo-louvor">
-      ${htmlLinhas}
-    </div>
+    <div class="corpo-louvor">${htmlLinhas}</div>
   `;
 }
 
