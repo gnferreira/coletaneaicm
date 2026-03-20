@@ -1,21 +1,56 @@
+let dbColetanea = [];
+let dbAvulsos = [];
 let songs = [];
+let bancoAtual = "coletanea";
 
 const search = document.getElementById("search");
 const suggestions = document.getElementById("suggestions");
 const songDiv = document.getElementById("song");
+const statusBanco = document.getElementById("statusBanco");
+const btnColetanea = document.getElementById("btnColetanea");
+const btnAvulsos = document.getElementById("btnAvulsos");
 
 async function carregar() {
   try {
-    const res = await fetch("songs.json");
-    songs = await res.json();
-    console.log("Louvores carregados:", songs.length);
+    const [resColetanea, resAvulsos] = await Promise.all([
+      fetch("songs_profissional_mobile_corrigido_espacos.json"),
+      fetch("louvores_avulsos.json")
+    ]);
+
+    dbColetanea = await resColetanea.json();
+    dbAvulsos = await resAvulsos.json();
+
+    songs = dbColetanea;
+    atualizarStatus();
+    console.log("Coletânea:", dbColetanea.length, "Avulsos:", dbAvulsos.length);
   } catch (e) {
     console.error(e);
-    alert("Erro ao carregar songs.json");
+    alert("Erro ao carregar os bancos de dados.");
   }
 }
 
 carregar();
+
+function atualizarStatus() {
+  statusBanco.textContent = bancoAtual === "coletanea"
+    ? "Base atual: Louvores da Coletânea"
+    : "Base atual: Louvores Avulsos";
+
+  btnColetanea.classList.toggle("active", bancoAtual === "coletanea");
+  btnAvulsos.classList.toggle("active", bancoAtual === "avulsos");
+}
+
+function trocarBanco(tipo) {
+  bancoAtual = tipo;
+  songs = tipo === "coletanea" ? dbColetanea : dbAvulsos;
+  suggestions.innerHTML = "";
+  songDiv.innerHTML = "";
+  search.value = "";
+  atualizarStatus();
+}
+
+btnColetanea.addEventListener("click", () => trocarBanco("coletanea"));
+btnAvulsos.addEventListener("click", () => trocarBanco("avulsos"));
 
 function escapeHtml(text) {
   return String(text || "")
@@ -31,9 +66,11 @@ function ehLinhaEspecial(letra) {
   return (
     t === "coro" ||
     t.startsWith("introdução:") ||
+    t.startsWith("int:") ||
     t.startsWith("instrumentos:") ||
     t.startsWith("final:") ||
-    t.startsWith("repetir")
+    t.startsWith("repetir") ||
+    t.startsWith("repete")
   );
 }
 
@@ -45,40 +82,7 @@ function normalizarLinhas(linhas) {
     letra: (l?.letra || "").trim()
   }));
 
-  const filtradas = limpas.filter((linha) => {
-    const texto = linha.letra;
-    const acordes = linha.acordes;
-
-    if (!texto && !acordes) return false;
-
-    if (
-      texto === "|" ||
-      texto === "I" ||
-      texto === "bis" ||
-      texto === "%"
-    ) {
-      return false;
-    }
-
-    return true;
-  });
-
-  const semRepeticao = [];
-  let ultimaFoiSeparador = false;
-
-  for (const linha of filtradas) {
-    const vaziaVisual = !linha.acordes && !linha.letra;
-    const separador = vaziaVisual || ehLinhaEspecial(linha.letra);
-
-    if (separador && ultimaFoiSeparador) {
-      continue;
-    }
-
-    semRepeticao.push(linha);
-    ultimaFoiSeparador = separador;
-  }
-
-  return semRepeticao;
+  return limpas.filter((linha) => linha.acordes || linha.letra);
 }
 
 function renderLinha(linha) {
