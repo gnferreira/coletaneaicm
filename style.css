@@ -102,7 +102,8 @@ input {
 
 .song h2 {
   margin: 0;
-  font-size: 18px;
+  font-size: 20px;
+  line-height: 1.2;
 }
 
 .corpo-louvor {
@@ -110,28 +111,30 @@ input {
   padding: 0;
 }
 
-/* chave da correção */
 .pre-louvor {
   margin: 0;
   padding: 0;
   white-space: pre-wrap;
   font-family: "Courier New", monospace;
-  font-size: 14px;
-  line-height: 0.9;
+  font-size: 17px;
+  line-height: 0.95;
+  color: #ffffff;
 }
 
 .acordes-inline {
   color: #00ffcc;
-  font-weight: bold;
+  font-weight: 700;
+  text-shadow: 0 0 1px #00ffcc;
 }
 
 .letra-inline {
   color: #ffffff;
+  font-weight: 500;
 }
 
 .linha-especial-inline {
   color: #dddddd;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 @media (max-width: 480px) {
@@ -154,7 +157,7 @@ input {
   }
 
   .song h2 {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .item-sugestao {
@@ -168,7 +171,7 @@ input {
   }
 
   .pre-louvor {
-    font-size: 13px;
-    line-height: 0.85;
+    font-size: 15px;
+    line-height: 0.9;
   }
 }
