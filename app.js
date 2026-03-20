@@ -6,12 +6,12 @@ const songDiv = document.getElementById("song");
 
 async function carregar() {
   try {
-    const res = await fetch("songs_profissional.json");
+    const res = await fetch("songs.json");
     songs = await res.json();
     console.log("Louvores carregados:", songs.length);
   } catch (e) {
     console.error(e);
-    alert("Erro ao carregar songs_profissional.json");
+    alert("Erro ao carregar songs.json");
   }
 }
 
