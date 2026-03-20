@@ -12,38 +12,44 @@ body {
 header {
   background: #8b0000;
   text-align: center;
-  padding: 16px;
-  font-size: 18px;
+  padding: 14px;
+  font-size: 17px;
   font-weight: bold;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .container {
-  padding: 12px;
+  padding: 10px;
   max-width: 760px;
   margin: 0 auto;
 }
 
 input {
   width: 100%;
-  padding: 14px;
+  padding: 12px;
   border-radius: 10px;
   border: none;
   font-size: 16px;
   outline: none;
+  background: #ffffff;
+  color: #111111;
 }
 
 .suggestions {
   margin-top: 8px;
   background: #1e1e1e;
   border-radius: 10px;
-  max-height: 260px;
+  max-height: 240px;
   overflow-y: auto;
 }
 
 .item-sugestao {
-  padding: 12px;
+  padding: 11px 12px;
   border-bottom: 1px solid #333;
   cursor: pointer;
+  font-size: 14px;
 }
 
 .item-sugestao:hover {
@@ -51,25 +57,25 @@ input {
 }
 
 .song {
-  margin-top: 20px;
+  margin-top: 14px;
   background: #181818;
   border-radius: 14px;
-  padding: 16px;
+  padding: 14px 12px;
 }
 
 .cabecalho-louvor {
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 .numero-louvor {
-  font-size: 13px;
+  font-size: 12px;
   opacity: 0.75;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 .song h2 {
   margin: 0;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.2;
 }
 
@@ -81,49 +87,75 @@ input {
 }
 
 .linha-musica {
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .acordes {
   color: #00ffcc;
   font-weight: bold;
-  line-height: 1.1;
+  line-height: 1;
   margin-bottom: 0;
+  font-size: 14px;
 }
 
 .letra {
   color: #ffffff;
-  line-height: 1.25;
+  line-height: 1.15;
+  font-size: 14px;
 }
 
 .linha-especial {
-  margin: 8px 0 4px;
+  margin: 6px 0 2px;
   font-weight: bold;
   color: #dddddd;
+  font-size: 13px;
 }
 
 @media (max-width: 480px) {
   header {
-    font-size: 16px;
-    padding: 14px;
-  }
-
-  input {
     font-size: 15px;
     padding: 12px;
   }
 
+  .container {
+    padding: 8px;
+  }
+
+  input {
+    font-size: 15px;
+    padding: 11px;
+  }
+
   .song {
-    padding: 14px;
+    padding: 12px 10px;
+    border-radius: 12px;
   }
 
   .song h2 {
-    font-size: 18px;
+    font-size: 16px;
   }
 
-  .acordes,
-  .letra,
+  .numero-louvor {
+    font-size: 11px;
+  }
+
+  .item-sugestao {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .acordes {
+    font-size: 13px;
+    line-height: 1;
+  }
+
+  .letra {
+    font-size: 13px;
+    line-height: 1.1;
+  }
+
   .linha-especial {
-    font-size: 14px;
+    font-size: 12px;
+    margin: 5px 0 2px;
   }
 }
