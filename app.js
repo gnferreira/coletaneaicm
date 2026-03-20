@@ -14,7 +14,7 @@ async function carregar() {
   try {
     const [resColetanea, resAvulsos] = await Promise.all([
       fetch("songs_ultra_compacto.json"),
-      fetch("louvores_avulsos_sem_espacos.json")
+      fetch("louvores_avulsos_revisado.json")
     ]);
 
     dbColetanea = await resColetanea.json();
@@ -85,36 +85,29 @@ function normalizarLinhas(linhas) {
     .filter((linha) => linha.acordes.trim() || linha.letra.trim());
 }
 
-function renderLinhaCifrada(linha) {
-  const acordes = escapeHtml(linha.acordes || "");
-  const letra = escapeHtml(linha.letra || "");
+function renderPreLouvor(linhas) {
+  let html = '<pre class="pre-louvor">';
 
-  if (ehLinhaEspecial(linha.letra)) {
-    return `<div class="linha-especial">${letra}</div>`;
+  for (const linha of linhas) {
+    const acordes = escapeHtml(linha.acordes);
+    const letra = escapeHtml(linha.letra);
+
+    if (ehLinhaEspecial(linha.letra)) {
+      html += `<span class="linha-especial-inline">${letra}</span>\n`;
+      continue;
+    }
+
+    if (acordes) {
+      html += `<span class="acordes-inline">${acordes}</span>\n`;
+    }
+
+    if (letra) {
+      html += `<span class="letra-inline">${letra}</span>\n`;
+    }
   }
 
-  if (linha.acordes.trim() && linha.letra.trim()) {
-    return `
-      <div class="linha-cifrada">
-        <pre class="camada-acordes">${acordes}</pre>
-        <pre class="camada-letra">${letra}</pre>
-      </div>
-    `;
-  }
-
-  if (linha.acordes.trim()) {
-    return `
-      <div class="linha-cifrada so-acordes">
-        <pre class="camada-acordes">${acordes}</pre>
-      </div>
-    `;
-  }
-
-  return `
-    <div class="linha-cifrada so-letra">
-      <pre class="camada-letra">${letra}</pre>
-    </div>
-  `;
+  html += "</pre>";
+  return html;
 }
 
 function mostrar(song) {
@@ -122,15 +115,14 @@ function mostrar(song) {
   search.value = `${song.numero} - ${song.titulo}`;
 
   const linhas = normalizarLinhas(song.linhas);
-  const htmlLinhas = linhas.map(renderLinhaCifrada).join("");
 
   songDiv.innerHTML = `
     <div class="cabecalho-louvor">
       <div class="numero-louvor">${escapeHtml(song.numero)}</div>
       <h2>${escapeHtml(song.titulo)}</h2>
     </div>
-    <div class="corpo-louvor cifra-club-mode">
-      ${htmlLinhas}
+    <div class="corpo-louvor">
+      ${renderPreLouvor(linhas)}
     </div>
   `;
 }
