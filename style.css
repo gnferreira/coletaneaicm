@@ -26,169 +26,72 @@ header {
   margin: 0 auto;
 }
 
-.seletor-banco {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-
-.tab-btn {
-  border: none;
-  border-radius: 10px;
-  padding: 12px 8px;
-  font-size: 13px;
-  font-weight: bold;
-  cursor: pointer;
-  background: #2a2a2a;
-  color: #fff;
-}
-
-.tab-btn.active {
-  background: #00a884;
-}
-
-input {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: none;
-  font-size: 16px;
-  outline: none;
-  background: #ffffff;
-  color: #111111;
-}
-
-.status-banco {
-  font-size: 12px;
-  opacity: 0.8;
-  margin-top: 8px;
-}
-
-.suggestions {
-  margin-top: 8px;
-  background: #1e1e1e;
-  border-radius: 10px;
-  max-height: 240px;
-  overflow-y: auto;
-}
-
-.item-sugestao {
-  padding: 11px 12px;
-  border-bottom: 1px solid #333;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.item-sugestao:hover {
-  background: #333;
-}
-
-.song {
-  margin-top: 14px;
-  background: #181818;
-  border-radius: 14px;
-  padding: 14px 12px;
-}
-
-.cabecalho-louvor {
-  margin-bottom: 10px;
-}
-
-.numero-louvor {
-  font-size: 12px;
-  opacity: 0.75;
-  margin-bottom: 3px;
-}
-
-.song h2 {
-  margin: 0;
-  font-size: 18px;
-  line-height: 1.2;
-}
-
-.corpo-louvor {
-  font-family: "Courier New", monospace;
-  white-space: pre-wrap;
-  word-break: keep-all;
-  overflow-x: auto;
-}
-
+/* 🔥 REMOVE QUALQUER ESPAÇO ENTRE LINHAS */
 .linha-musica {
-  margin-bottom: 1px;
+  margin: 0;
+  padding: 0;
 }
 
+/* 🔥 CIFRA */
 .acordes {
   color: #00ffcc;
   font-weight: bold;
-  line-height: 0.9;
-  margin-bottom: -1px;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
   font-size: 14px;
 }
 
+/* 🔥 LETRA */
 .letra {
   color: #ffffff;
-  line-height: 1.05;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
   font-size: 14px;
 }
 
+/* 🔥 REMOVE ESPAÇO GLOBAL */
+.corpo-louvor {
+  font-family: "Courier New", monospace;
+  white-space: pre-wrap;
+  margin: 0;
+  padding: 0;
+}
+
+/* 🔥 REMOVE QUALQUER ESPAÇO ENTRE ELEMENTOS */
+.corpo-louvor * {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* 🔥 LINHAS ESPECIAIS (coro etc) */
 .linha-especial {
-  margin: 4px 0 1px;
+  margin: 0;
+  padding: 0;
   font-weight: bold;
   color: #dddddd;
   font-size: 13px;
 }
 
-@media (max-width: 480px) {
-  header {
-    font-size: 15px;
-    padding: 12px;
-  }
+/* RESTANTE NORMAL */
+.song {
+  margin-top: 10px;
+  background: #181818;
+  border-radius: 14px;
+  padding: 10px;
+}
 
-  .container {
-    padding: 8px;
-  }
+.cabecalho-louvor {
+  margin-bottom: 8px;
+}
 
-  input {
-    font-size: 15px;
-    padding: 11px;
-  }
+.numero-louvor {
+  font-size: 12px;
+  opacity: 0.75;
+}
 
-  .song {
-    padding: 12px 10px;
-    border-radius: 12px;
-  }
-
-  .song h2 {
-    font-size: 16px;
-  }
-
-  .numero-louvor {
-    font-size: 11px;
-  }
-
-  .item-sugestao {
-    font-size: 13px;
-    padding: 10px;
-  }
-
-  .acordes {
-    font-size: 13px;
-    line-height: 0.9;
-  }
-
-  .letra {
-    font-size: 13px;
-    line-height: 1.05;
-  }
-
-  .linha-especial {
-    font-size: 12px;
-    margin: 4px 0 1px;
-  }
-
-  .tab-btn {
-    font-size: 12px;
-    padding: 11px 6px;
-  }
+.song h2 {
+  margin: 0;
+  font-size: 16px;
 }
