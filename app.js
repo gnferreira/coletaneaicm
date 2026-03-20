@@ -13,7 +13,7 @@ const btnAvulsos = document.getElementById("btnAvulsos");
 async function carregar() {
   try {
     const [resColetanea, resAvulsos] = await Promise.all([
-      fetch("songs_profissional_mobile_sem_espacos.json"),
+      fetch("songs_ultra_compacto.json"),
       fetch("louvores_avulsos_sem_espacos.json")
     ]);
 
@@ -22,7 +22,6 @@ async function carregar() {
 
     songs = dbColetanea;
     atualizarStatus();
-    console.log("Coletânea:", dbColetanea.length, "Avulsos:", dbAvulsos.length);
   } catch (e) {
     console.error(e);
     alert("Erro ao carregar os bancos de dados.");
