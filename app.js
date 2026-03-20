@@ -13,8 +13,8 @@ const btnAvulsos = document.getElementById("btnAvulsos");
 async function carregar() {
   try {
     const [resColetanea, resAvulsos] = await Promise.all([
-      fetch("songs_profissional_mobile_corrigido_espacos.json"),
-      fetch("louvores_avulsos.json")
+      fetch("songs_profissional_mobile_sem_espacos.json"),
+      fetch("louvores_avulsos_sem_espacos.json")
     ]);
 
     dbColetanea = await resColetanea.json();
@@ -32,9 +32,10 @@ async function carregar() {
 carregar();
 
 function atualizarStatus() {
-  statusBanco.textContent = bancoAtual === "coletanea"
-    ? "Base atual: Louvores da Coletânea"
-    : "Base atual: Louvores Avulsos";
+  statusBanco.textContent =
+    bancoAtual === "coletanea"
+      ? "Base atual: Louvores da Coletânea"
+      : "Base atual: Louvores Avulsos";
 
   btnColetanea.classList.toggle("active", bancoAtual === "coletanea");
   btnAvulsos.classList.toggle("active", bancoAtual === "avulsos");
@@ -77,12 +78,12 @@ function ehLinhaEspecial(letra) {
 function normalizarLinhas(linhas) {
   if (!Array.isArray(linhas)) return [];
 
-  const limpas = linhas.map((l) => ({
-    acordes: (l?.acordes || "").trim(),
-    letra: (l?.letra || "").trim()
-  }));
-
-  return limpas.filter((linha) => linha.acordes || linha.letra);
+  return linhas
+    .map((l) => ({
+      acordes: (l?.acordes || "").trim(),
+      letra: (l?.letra || "").trim()
+    }))
+    .filter((linha) => linha.acordes || linha.letra);
 }
 
 function renderLinha(linha) {
