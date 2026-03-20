@@ -1,31 +1,201 @@
-.corpo-louvor * {
-  margin: 0 !important;
-  padding: 0 !important;
-  line-height: 1 !important;
+* {
+  box-sizing: border-box;
 }
 
-/* remove QUALQUER espaço entre blocos */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #121212;
+  color: #ffffff;
+}
+
+header {
+  background: #8b0000;
+  text-align: center;
+  padding: 14px;
+  font-size: 17px;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.container {
+  padding: 10px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.seletor-banco {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.tab-btn {
+  border: none;
+  border-radius: 10px;
+  padding: 12px 8px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #2a2a2a;
+  color: #fff;
+  transition: 0.2s;
+}
+
+.tab-btn.active {
+  background: #00a884;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+  outline: none;
+  background: #ffffff;
+  color: #111111;
+}
+
+.status-banco {
+  font-size: 12px;
+  opacity: 0.8;
+  margin-top: 8px;
+}
+
+.suggestions {
+  margin-top: 8px;
+  background: #1e1e1e;
+  border-radius: 10px;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.item-sugestao {
+  padding: 11px 12px;
+  border-bottom: 1px solid #333;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.item-sugestao:hover {
+  background: #333;
+}
+
+.song {
+  margin-top: 14px;
+  background: #181818;
+  border-radius: 14px;
+  padding: 14px 12px;
+}
+
+.cabecalho-louvor {
+  margin-bottom: 10px;
+}
+
+.numero-louvor {
+  font-size: 12px;
+  opacity: 0.75;
+  margin-bottom: 3px;
+}
+
+.song h2 {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.corpo-louvor {
+  font-family: "Courier New", monospace;
+  white-space: pre-wrap;
+  word-break: keep-all;
+  overflow-x: auto;
+}
+
+/* AQUI fica o ajuste só do louvor */
 .linha-musica {
   margin: 0;
   padding: 0;
-  line-height: 1;
 }
 
-/* cifra */
 .acordes {
   color: #00ffcc;
   font-weight: bold;
+  font-size: 14px;
+  line-height: 1;
   margin: 0;
   padding: 0;
-  line-height: 1;
   display: block;
 }
 
-/* letra */
 .letra {
   color: #ffffff;
+  font-size: 14px;
+  line-height: 1;
   margin: 0;
   padding: 0;
-  line-height: 1;
   display: block;
+}
+
+.linha-especial {
+  color: #dddddd;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 480px) {
+  header {
+    font-size: 15px;
+    padding: 12px;
+  }
+
+  .container {
+    padding: 8px;
+  }
+
+  input {
+    font-size: 15px;
+    padding: 11px;
+  }
+
+  .song {
+    padding: 12px 10px;
+    border-radius: 12px;
+  }
+
+  .song h2 {
+    font-size: 16px;
+  }
+
+  .numero-louvor {
+    font-size: 11px;
+  }
+
+  .item-sugestao {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .acordes {
+    font-size: 13px;
+  }
+
+  .letra {
+    font-size: 13px;
+  }
+
+  .linha-especial {
+    font-size: 12px;
+  }
+
+  .tab-btn {
+    font-size: 12px;
+    padding: 11px 6px;
+  }
 }
