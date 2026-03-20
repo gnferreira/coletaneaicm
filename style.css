@@ -86,26 +86,27 @@ input {
   overflow-x: auto;
 }
 
+/* 🔥 AJUSTE PRINCIPAL */
 .linha-musica {
-  margin-bottom: 0px;
+  margin-bottom: 1px; /* controla espaço entre frases */
 }
 
 .acordes {
   color: #00ffcc;
   font-weight: bold;
-  line-height: 0.75;
-  margin-bottom: -2;
+  line-height: 0.9;
+  margin-bottom: -1px; /* mantém cifra próxima da letra */
   font-size: 14px;
 }
 
 .letra {
   color: #ffffff;
-  line-height: 1;
+  line-height: 1.05;
   font-size: 14px;
 }
 
 .linha-especial {
-  margin: 6px 0 2px;
+  margin: 5px 0 2px;
   font-weight: bold;
   color: #dddddd;
   font-size: 13px;
@@ -146,16 +147,16 @@ input {
 
   .acordes {
     font-size: 13px;
-    line-height: 1;
+    line-height: 0.9;
   }
 
   .letra {
     font-size: 13px;
-    line-height: 1.1;
+    line-height: 1.05;
   }
 
   .linha-especial {
     font-size: 12px;
-    margin: 5px 0 2px;
+    margin: 4px 0 2px;
   }
 }
