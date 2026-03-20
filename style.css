@@ -1,42 +1,130 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
+  margin: 0;
   font-family: Arial, sans-serif;
   background: #121212;
-  color: #fff;
-  padding: 10px;
+  color: #ffffff;
+}
+
+header {
+  background: #8b0000;
+  text-align: center;
+  padding: 16px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.container {
+  padding: 12px;
+  max-width: 760px;
+  margin: 0 auto;
 }
 
 input {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   border-radius: 10px;
   border: none;
-  margin-bottom: 10px;
+  font-size: 16px;
+  outline: none;
 }
 
-.suggestions div {
-  padding: 10px;
+.suggestions {
+  margin-top: 8px;
+  background: #1e1e1e;
+  border-radius: 10px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.item-sugestao {
+  padding: 12px;
   border-bottom: 1px solid #333;
   cursor: pointer;
 }
 
-.suggestions div:hover {
+.item-sugestao:hover {
   background: #333;
 }
 
-.linha {
-  margin-bottom: 12px;
+.song {
+  margin-top: 20px;
+  background: #181818;
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.cabecalho-louvor {
+  margin-bottom: 14px;
+}
+
+.numero-louvor {
+  font-size: 13px;
+  opacity: 0.75;
+  margin-bottom: 4px;
+}
+
+.song h2 {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.corpo-louvor {
+  font-family: "Courier New", monospace;
+  white-space: pre-wrap;
+  word-break: keep-all;
+  overflow-x: auto;
+}
+
+.linha-musica {
+  margin-bottom: 6px;
 }
 
 .acordes {
   color: #00ffcc;
   font-weight: bold;
-  font-family: monospace;
+  line-height: 1.2;
+  margin-bottom: 1px;
 }
 
 .letra {
-  font-size: 16px;
+  color: #ffffff;
+  line-height: 1.35;
 }
 
-h2 {
-  margin-bottom: 15px;
+.bloco-espaco {
+  height: 10px;
+}
+
+@media (max-width: 480px) {
+  header {
+    font-size: 16px;
+    padding: 14px;
+  }
+
+  input {
+    font-size: 15px;
+    padding: 12px;
+  }
+
+  .song {
+    padding: 14px;
+  }
+
+  .song h2 {
+    font-size: 18px;
+  }
+
+  .acordes,
+  .letra {
+    font-size: 14px;
+  }
+
+  .bloco-espaco {
+    height: 8px;
+  }
 }
