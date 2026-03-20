@@ -85,22 +85,29 @@ function normalizarLinhas(linhas) {
     .filter((linha) => linha.acordes || linha.letra);
 }
 
-function renderLinha(linha) {
-  const acordes = escapeHtml(linha.acordes);
-  const letra = escapeHtml(linha.letra);
+function renderPreLouvor(linhas) {
+  let html = '<pre class="pre-louvor">';
 
-  if (!acordes && !letra) return "";
+  for (const linha of linhas) {
+    const acordes = escapeHtml(linha.acordes);
+    const letra = escapeHtml(linha.letra);
 
-  if (ehLinhaEspecial(linha.letra)) {
-    return `<div class="linha-especial">${letra}</div>`;
+    if (ehLinhaEspecial(linha.letra)) {
+      html += `<span class="linha-especial-inline">${letra}</span>\n`;
+      continue;
+    }
+
+    if (acordes) {
+      html += `<span class="acordes-inline">${acordes}</span>\n`;
+    }
+
+    if (letra) {
+      html += `<span class="letra-inline">${letra}</span>\n`;
+    }
   }
 
-  return `
-    <div class="linha-musica">
-      ${acordes ? `<div class="acordes">${acordes}</div>` : ""}
-      ${letra ? `<div class="letra">${letra}</div>` : ""}
-    </div>
-  `;
+  html += "</pre>";
+  return html;
 }
 
 function mostrar(song) {
@@ -108,14 +115,15 @@ function mostrar(song) {
   search.value = `${song.numero} - ${song.titulo}`;
 
   const linhas = normalizarLinhas(song.linhas);
-  const htmlLinhas = linhas.map(renderLinha).join("");
 
   songDiv.innerHTML = `
     <div class="cabecalho-louvor">
       <div class="numero-louvor">${escapeHtml(song.numero)}</div>
       <h2>${escapeHtml(song.titulo)}</h2>
     </div>
-    <div class="corpo-louvor">${htmlLinhas}</div>
+    <div class="corpo-louvor">
+      ${renderPreLouvor(linhas)}
+    </div>
   `;
 }
 
